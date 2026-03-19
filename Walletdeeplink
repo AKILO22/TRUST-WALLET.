@@ -1,0 +1,25 @@
+/**
+ * Generate a Trust Wallet deeplink for sending Bitcoin
+ * @param recipientAddress - Bitcoin address to send to
+ * @param amount - Amount in BTC (optional)
+ * @returns deeplink URL
+ */
+function generateBitcoinSendDeeplink(recipientAddress: string, amount?: string): string {
+  const baseUrl = 'trust://';
+  const action = 'send';
+  const chainId = '0'; // Bitcoin chain ID
+  
+  let deeplink = `${baseUrl}${action}?address=${recipientAddress}&chainID=${chainId}`;
+  
+  if (amount) {
+    deeplink += `&amount=${amount}`;
+  }
+  
+  return deeplink;
+}
+
+// Example usage:
+const btcAddress = 'bc1qfpu9qt70xppkggr7q8ttn8h2q3p75t9440nj7x';
+const sendLink = generateBitcoinSendDeeplink(btcAddress, '0.5');
+console.log(sendLink);
+// Output: trust://send?address=bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq&chainID=0&amount=0.5
